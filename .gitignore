@@ -1,0 +1,7 @@
+# ignore text files
+*.txt
+# ignore target dir
+target/**
+# ignore cargo lock file
+Cargo.lock
+
