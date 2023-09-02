@@ -7,13 +7,13 @@ use super::Problem;
 
 struct Problem4_1;
 impl Problem for Problem4_1 {
-    fn solve(&self, file_dir: &str) -> () {
+    fn solve(&self, file_dir: &str) {
         let file = File::open(format!("{file_dir}/4_1.txt")).unwrap();
         let reader = BufReader::new(&file);
         let mut total: i32 = 0;
         for l in reader.lines() {
             let ln = l.unwrap();
-            let spl = ln.split(",").collect::<Vec<&str>>();
+            let spl = ln.split(',').collect::<Vec<&str>>();
             let r1 = self.find_range(spl[0]);
 
             let r2 = self.find_range(spl[1]);
@@ -26,7 +26,7 @@ impl Problem for Problem4_1 {
 }
 impl Problem4_1 {
     fn find_range(&self, range: &str) -> (i32, i32) {
-        let v = range.split("-").collect::<Vec<&str>>();
+        let v = range.split('-').collect::<Vec<&str>>();
         let low = v[0].parse::<i32>().unwrap();
         let high = v[1].parse::<i32>().unwrap();
         (low, high)
@@ -44,13 +44,13 @@ impl Problem4_1 {
 
 struct Problem4_2;
 impl Problem for Problem4_2 {
-    fn solve(&self, file_dir: &str) -> () {
+    fn solve(&self, file_dir: &str) {
         let file = File::open(format!("{file_dir}/4_1.txt")).unwrap();
         let reader = BufReader::new(&file);
         let mut total: i32 = 0;
         for l in reader.lines() {
             let ln = l.unwrap();
-            let spl = ln.split(",").collect::<Vec<&str>>();
+            let spl = ln.split(',').collect::<Vec<&str>>();
             let r1 = self.find_range(spl[0]);
 
             let r2 = self.find_range(spl[1]);
@@ -63,7 +63,7 @@ impl Problem for Problem4_2 {
 }
 impl Problem4_2 {
     fn find_range(&self, range: &str) -> (i32, i32) {
-        let v = range.split("-").collect::<Vec<&str>>();
+        let v = range.split('-').collect::<Vec<&str>>();
         let low = v[0].parse::<i32>().unwrap();
         let high = v[1].parse::<i32>().unwrap();
         (low, high)

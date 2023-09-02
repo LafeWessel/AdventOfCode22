@@ -26,15 +26,15 @@ impl Problem3_1 {
     fn get_char_value(&self, val: u8) -> i32 {
         if val > 0x60 {
             // value is lowercase
-            return (val - 0x60) as i32;
+            (val - 0x60) as i32
         } else {
             // value is uppercase
-            return ((val - 0x40) + 26) as i32;
+            ((val - 0x40) + 26) as i32
         }
     }
     fn find_char(&self, letters: &str) -> u8 {
         // split the string in half and find the only letter that is in both sets
-        let half = (letters.len() / 2) as usize;
+        let half = letters.len() / 2;
         let fw = &letters[0..half];
         let sw = &letters[half..];
 
@@ -53,7 +53,7 @@ impl Problem for Problem3_2 {
         let file = File::open(format!("{file_dir}/3_1.txt")).unwrap();
         let reader = BufReader::new(&file);
         let mut total: i32 = 0;
-        let ct = reader.lines().count() / 3;
+        let _ct = reader.lines().count() / 3;
 
         let file = File::open(format!("{file_dir}/3_1.txt")).unwrap();
         let reader = BufReader::new(&file);
@@ -77,10 +77,10 @@ impl Problem3_2 {
     fn get_char_value(&self, val: u8) -> i32 {
         if val > 0x60 {
             // value is lowercase
-            return (val - 0x60) as i32;
+            (val - 0x60) as i32
         } else {
             // value is uppercase
-            return ((val - 0x40) + 26) as i32;
+            ((val - 0x40) + 26) as i32
         }
     }
     fn find_common_char(&self, str1: &str, str2: &str, str3: &str) -> u8 {

@@ -73,7 +73,7 @@ impl Problem for Problem2_1 {
         for line in reader.lines() {
             // split line
             let ln = line.unwrap();
-            let mut split = ln.split(" ");
+            let mut split = ln.split(' ');
             // determine elf's play
             let ep = self.elfs(split.next().unwrap());
             // determine my play
@@ -115,7 +115,7 @@ impl Problem for Problem2_2 {
         for line in reader.lines() {
             // split line
             let ln = line.unwrap();
-            let mut split = ln.split(" ");
+            let mut split = ln.split(' ');
             // determine elf's play
             let ep = self.elfs(split.next().unwrap());
             // determine my play
