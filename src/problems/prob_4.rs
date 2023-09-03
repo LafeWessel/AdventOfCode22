@@ -5,7 +5,8 @@ use std::{
 
 use super::Problem;
 
-struct Problem4_1;
+#[derive(Copy, Clone, Debug)]
+pub struct Problem4_1;
 impl Problem for Problem4_1 {
     fn solve(&self, file_dir: &str) {
         let file = File::open(format!("{file_dir}/4_1.txt")).unwrap();
@@ -42,7 +43,8 @@ impl Problem4_1 {
     }
 }
 
-struct Problem4_2;
+#[derive(Copy, Clone, Debug)]
+pub struct Problem4_2;
 impl Problem for Problem4_2 {
     fn solve(&self, file_dir: &str) {
         let file = File::open(format!("{file_dir}/4_1.txt")).unwrap();

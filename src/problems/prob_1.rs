@@ -5,7 +5,8 @@ use std::{
 
 use super::Problem;
 
-struct Problem1_1;
+#[derive(Copy, Clone, Debug)]
+pub struct Problem1_1;
 impl Problem for Problem1_1 {
     fn solve(&self, file_dir: &str) {
         // read in the file
@@ -29,7 +30,8 @@ impl Problem for Problem1_1 {
     }
 }
 
-struct Problem1_2;
+#[derive(Copy, Clone, Debug)]
+pub struct Problem1_2;
 impl Problem for Problem1_2 {
     fn solve(&self, file_dir: &str) {
         // read in the file

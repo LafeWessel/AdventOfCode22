@@ -62,7 +62,9 @@ impl Rps {
         }
     }
 }
-struct Problem2_1;
+
+#[derive(Copy, Clone, Debug)]
+pub struct Problem2_1;
 impl Problem for Problem2_1 {
     fn solve(&self, file_dir: &str) {
         // read in file
@@ -104,7 +106,8 @@ impl Problem2_1 {
     }
 }
 
-struct Problem2_2;
+#[derive(Copy, Clone, Debug)]
+pub struct Problem2_2;
 impl Problem for Problem2_2 {
     fn solve(&self, file_dir: &str) {
         // read in file
