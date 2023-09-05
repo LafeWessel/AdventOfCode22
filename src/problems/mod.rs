@@ -5,6 +5,7 @@ pub mod prob_4;
 pub mod prob_5;
 pub mod prob_6;
 pub mod prob_7;
+pub mod prob_8;
 
 pub trait Problem {
     fn solve(&self, file_dir: &str);

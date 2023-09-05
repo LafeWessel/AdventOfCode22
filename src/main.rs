@@ -7,6 +7,7 @@ use problems::{
     prob_5::{Problem5_1, Problem5_2},
     prob_6::{Problem6_1, Problem6_2},
     prob_7::{Problem7_1, Problem7_2},
+    prob_8::{Problem8_1, Problem8_2},
     Problem,
 };
 
@@ -28,6 +29,8 @@ enum Problems {
     P62,
     P71,
     P72,
+    P81,
+    P82,
 }
 
 impl Problems {
@@ -47,6 +50,8 @@ impl Problems {
             Problems::P62 => Box::new(Problem6_2),
             Problems::P71 => Box::new(Problem7_1),
             Problems::P72 => Box::new(Problem7_2),
+            Problems::P81 => Box::new(Problem8_1),
+            Problems::P82 => Box::new(Problem8_2),
         }
     }
 }
