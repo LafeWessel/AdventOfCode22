@@ -49,7 +49,7 @@ impl Problem7_1 {
         reading_output: bool,
     ) -> (Uuid, bool) {
         // reading command
-        if ln.starts_with("$") {
+        if ln.starts_with('$') {
             if ln.starts_with("$ cd") {
                 let dir = ln.replace("$ cd ", "");
 
@@ -96,7 +96,7 @@ impl Problem7_1 {
         } else {
             panic!("Doing nothing!");
         }
-        return (curr_dir, false);
+        (curr_dir, false)
     }
 
     fn calculate_sizes(map: &HashMap<Uuid, Dir>) -> HashMap<Uuid, usize> {
@@ -172,7 +172,7 @@ impl Problem for Problem7_2 {
         let dir = sizes
             .iter()
             .filter(|(_f, s)| **s >= needed_space)
-            .min_by(|(_f1, s1), (_f2, s2)| s1.cmp(&s2))
+            .min_by(|(_f1, s1), (_f2, s2)| s1.cmp(s2))
             .unwrap();
 
         println!("7-1: {dir:?}");

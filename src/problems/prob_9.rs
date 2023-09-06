@@ -388,11 +388,11 @@ fn test_9_2() {
                 for j in i.iter() {
                     let mut chr = format!("{j}");
                     if *j == 255 {
-                        chr = format!(".");
+                        chr = ".".to_string();
                     }
                     print!("{chr} ");
                 }
-                println!("");
+                println!();
             }
         }
     }
@@ -404,10 +404,10 @@ fn test_9_2() {
         for j in i.iter() {
             let mut chr = format!("{j}");
             if *j == 255 {
-                chr = format!(".");
+                chr = ".".to_string();
             }
             print!("{chr} ");
         }
-        println!("");
+        println!();
     }
 }

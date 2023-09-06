@@ -14,7 +14,7 @@ fn find_queues(file_path: &str) -> HashMap<usize, VecDeque<char>> {
 
     for ln in rdr.lines() {
         let ln = ln.unwrap();
-        if ln == "" {
+        if ln.is_empty() {
             break;
         }
         for (i, chr) in ln.chars().enumerate() {
