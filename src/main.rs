@@ -1,6 +1,7 @@
 use clap::{Parser, ValueEnum};
 use problems::{
     prob_1::{Problem1_1, Problem1_2},
+    prob_10::{Problem10_1, Problem10_2},
     prob_2::{Problem2_1, Problem2_2},
     prob_3::{Problem3_1, Problem3_2},
     prob_4::{Problem4_1, Problem4_2},
@@ -34,6 +35,8 @@ enum Problems {
     P82,
     P91,
     P92,
+    P101,
+    P102,
 }
 
 impl Problems {
@@ -57,6 +60,8 @@ impl Problems {
             Problems::P82 => Box::new(Problem8_2),
             Problems::P91 => Box::new(Problem9_1),
             Problems::P92 => Box::new(Problem9_2),
+            Problems::P101 => Box::new(Problem10_1),
+            Problems::P102 => Box::new(Problem10_2),
         }
     }
 }
