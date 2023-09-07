@@ -10,7 +10,7 @@ use problems::{
     prob_7::{Problem7_1, Problem7_2},
     prob_8::{Problem8_1, Problem8_2},
     prob_9::{Problem9_1, Problem9_2},
-    Problem,
+    Problem, prob_11::{Problem11_1, Problem11_2},
 };
 
 mod problems;
@@ -37,6 +37,8 @@ enum Problems {
     P92,
     P101,
     P102,
+    P111,
+    P112,
 }
 
 impl Problems {
@@ -62,6 +64,10 @@ impl Problems {
             Problems::P92 => Box::new(Problem9_2),
             Problems::P101 => Box::new(Problem10_1),
             Problems::P102 => Box::new(Problem10_2),
+            Problems::P111 => Box::new(Problem11_1),
+            Problems::P112 => {
+                Box::new(Problem11_2)
+            },
         }
     }
 }
