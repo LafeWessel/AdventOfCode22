@@ -1,5 +1,6 @@
-use std::{fs::File, io::{BufReader, BufRead, Write}, ops::Add};
-use petgraph::{prelude::*, dot::Dot, algo::{astar, Measure}};
+use std::{fs::File, io::{BufReader, BufRead, Write}, ops::Add, hash::Hash, collections::{BinaryHeap, HashMap}};
+use petgraph::{prelude::*, dot::Dot, algo::{astar, Measure}, visit::{Visitable, IntoEdges} };
+use rayon::prelude::{IntoParallelRefIterator, ParallelIterator};
 
 use super::Problem;
 
@@ -43,27 +44,42 @@ impl Problem12_1 {
         let wid = lines[0].len();
         for i in 0..hgt {
             for j in 0..wid {
-                let chr: u8 = lines[i][j] as u8;
+                let chr = if lines[i][j] == 'S' || lines[i][j] == 'E' {
+                    255
+                } else {
+                    lines[i][j] as u8
+                };
                 // above
-                if i > 0 && (chr == lines[i-1][j] as u8 - 1 || chr >= lines[i-1][j] as u8){
+                if i > 0 && ( chr >= Self::convert_char(lines[i-1][j]) as u8 - 1){
                     map.add_edge(Idx {x: i, y: j }, Idx{x: i-1, y: j}, 1);
                 }
                 // below
-                if i + 1 < hgt && (chr == lines[i+1][j] as u8 - 1|| chr >= lines[i+1][j] as u8){
+                if i + 1 < hgt && (chr >= Self::convert_char(lines[i+1][j]) as u8 - 1){
                     map.add_edge(Idx {x: i, y: j }, Idx{x: i+1, y: j}, 1);
                 }
                 // left
-                if j > 0  && (chr == lines[i][j-1] as u8 - 1|| chr >= lines[i][j-1] as u8){
+                if j > 0 && ( chr >= Self::convert_char(lines[i][j-1]) as u8 - 1){
                     map.add_edge(Idx {x: i, y: j }, Idx{x: i, y: j-1}, 1);
                 }
                 // right
-                if j + 1 < wid && (chr == lines[i][j+1] as u8 - 1|| chr >= lines[i][j+1] as u8){
+                if j + 1 < wid && ( chr >= Self::convert_char(lines[i][j+1]) as u8 - 1){
                     map.add_edge(Idx {x: i, y: j }, Idx{x: i, y: j+1}, 1);
                 }
             }
         }
 
         (map, start, end)
+    }
+
+    fn convert_char(ch: char) -> char {
+        if ch == 'S'{
+            'a'
+        } else if ch == 'E'{
+            'z'
+        }
+        else {
+            ch
+        }
     }
 }
 
@@ -84,11 +100,7 @@ impl Problem for Problem12_1 {
         
         println!("Nodes: {}, edges: {}", graph.node_count(), graph.edge_count());
 
-        let mut f = File::create("test_graph.dot").unwrap();
-        write!(f, "{:?}", Dot::new(&graph)).unwrap();
-
         let path = astar(&graph, start, |n| n == end, |e| *e.2, |_| 0).unwrap();
-
         println!("12-1: {}", path.0);
 
     }
@@ -98,6 +110,29 @@ pub struct Problem12_2;
 
 impl Problem for Problem12_2 {
     fn solve(&self, file_dir: &str) {
-        todo!()
+        let file = File::open(&format!("{file_dir}/12_1.txt")).unwrap();
+        let rdr = BufReader::new(file);
+
+        let mut lns = vec![];
+        for ln in rdr.lines(){
+            let ln = ln.unwrap();
+            lns.push(ln.chars().collect::<Vec<_>>());
+        }
+        let (graph, _, end) = Problem12_1::create_graph(&lns);
+
+        let starting_points = lns.into_iter().enumerate().map(|(i, l)| l.into_iter().enumerate().filter_map(move |(j, c)| {
+            if c == 'a' {
+                Some(Idx{x: i, y: j})
+            } else {
+                None
+            }
+        })).flatten().collect::<Vec<Idx>>();
+
+        println!("End: {end:?}");
+        println!("Nodes: {}, edges: {}", graph.node_count(), graph.edge_count());
+        println!("Starting points: {}", starting_points.len());
+
+        let res = starting_points.par_iter().filter_map(|s| astar(&graph, *s, |n| n == end, |e| *e.2, |_| 0)).map(|r| r.0).collect::<Vec<u32>>();
+        println!("12-2: {:?}", res.iter().min());
     }
 }
